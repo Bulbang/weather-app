@@ -1,17 +1,27 @@
 <template>
-  <ChartLine
-    id="chart"
-    :data="{
-      labels,
-      datasets,
-    }"
-    :options="chartOptions"
-  />
+  <div class="wrapper">
+    <div class="panel">
+      <MyInput class="input" type="number" min="1" v-model="daysCount" />
+      <MyInput class="input" type="text" v-model="city" />
+      <MyButton @click="show">Show</MyButton>
+    </div>
+    <ChartLine
+      class="chart"
+      id="chart"
+      :data="{
+        labels,
+        datasets,
+      }"
+      :options="chartOptions"
+    />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { Line } from 'vue-chartjs';
+import MyInput from '@/components/common/MyInput.vue';
+import MyButton from '@/components/common/MyButton.vue';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -37,6 +47,8 @@ export default defineComponent({
   name: 'MainPage',
   components: {
     ChartLine: Line,
+    MyInput,
+    MyButton,
   },
   setup() {
     const weathersStore = useWeathersStore();
@@ -53,14 +65,33 @@ export default defineComponent({
   },
   data() {
     return {
-      selected: null,
+      daysCount: 5,
+      city: 'rivne',
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false,
       },
     };
+  },
+  methods: {
+    show() {
+      this.weathersStore.getWeathers(this.daysCount, this.city);
+    },
   },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.panel {
+  display: flex;
+  padding: 10px;
+}
+.input:first-of-type {
+  width: 100px;
+}
+.input {
+  margin: 0 10px 0 0;
+}
+.chart {
+  padding: 10px;
+}
+</style>
