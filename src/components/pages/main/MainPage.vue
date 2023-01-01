@@ -2,7 +2,7 @@
   <ChartLine
     id="chart"
     :data="{
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: dates,
       datasets: [
         {
           label: 'Data One',
