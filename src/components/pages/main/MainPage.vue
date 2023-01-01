@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <ChartLine
-      id="chart"
-      :data="{
-        labels: dates,
-        datasets: [{ data: [40, 20, 12] }],
-      }"
-      :options="chartOptions"
-    />
-  </div>
+  <ChartLine
+    id="chart"
+    :data="{
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'Data One',
+          backgroundColor: '#f87979',
+          data: [40, 39, 10, 40, 39, 80, 40],
+        },
+      ],
+    }"
+    :options="chartOptions"
+  />
 </template>
 
 <script lang="ts">
@@ -16,21 +20,23 @@ import { defineComponent, computed } from 'vue';
 import { Line } from 'vue-chartjs';
 import {
   Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
 } from 'chart.js';
 import { useWeathersStore } from '../../../stores/weathers';
 ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
+  Legend
 );
 
 export default defineComponent({
@@ -54,6 +60,7 @@ export default defineComponent({
       selected: null,
       chartOptions: {
         responsive: true,
+        maintainAspectRatio: false,
       },
     };
   },
