@@ -2,14 +2,8 @@
   <ChartLine
     id="chart"
     :data="{
-      labels: dates,
-      datasets: [
-        {
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 39, 10, 40, 39, 80, 40],
-        },
-      ],
+      labels,
+      datasets,
     }"
     :options="chartOptions"
   />
@@ -46,10 +40,12 @@ export default defineComponent({
   },
   setup() {
     const weathersStore = useWeathersStore();
-    const dates = computed(() => weathersStore.dates);
+    const labels = computed(() => weathersStore.labels);
+    const datasets = computed(() => weathersStore.datasets);
     return {
       weathersStore,
-      dates,
+      labels,
+      datasets,
     };
   },
   mounted() {
