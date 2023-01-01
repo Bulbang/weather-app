@@ -33,10 +33,10 @@ export const useWeathersStore = defineStore('weathers', {
         const weathers = response.data as Weather[];
         this.labels = weathers.map((weather) => weather.date);
         this.datasets = [
-          { label: 'Average temp', backgroundColor: '#44AF69' },
-          { label: 'Wind speed', backgroundColor: '#F8333C' },
-          { label: 'Average humidity', backgroundColor: '#FCAB10' },
-          { label: 'Average visibility', backgroundColor: '#2B9EB3' },
+          { label: 'Average temp', backgroundColor: '#44AF69', data: [] },
+          { label: 'Wind speed', backgroundColor: '#F8333C', data: [] },
+          { label: 'Average humidity', backgroundColor: '#FCAB10', data: [] },
+          { label: 'Average visibility', backgroundColor: '#2B9EB3', data: [] },
         ];
         weathers.map((weather) => {
           this.datasets[0].data?.push(weather.avg_temp_celsium);
